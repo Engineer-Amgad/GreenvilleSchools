@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "./lib/environment"
+
+#GreenvilleSchools::CLI.new.call
+
+school = GreenvilleSchools::Scraper.new.pagescrape
