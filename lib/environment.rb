@@ -3,7 +3,7 @@ require_relative "GreenvilleSchools/version"
 require_relative "GreenvilleSchools/cli"
 require_relative "GreenvilleSchools/scraper"
 
-require 'pry'
+#require 'pry'
 
 require 'nokogiri'
 
