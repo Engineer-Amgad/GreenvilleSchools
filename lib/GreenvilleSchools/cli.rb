@@ -51,11 +51,20 @@ class GreenvilleSchools::CLI
     end 
     
     while input != "back"
-    puts "to get more info about one the schools listed, enter school's number."
-    puts "To go back, type 'back'."
-    puts "What would you like to do?"
-    input = gets.strip
+      puts "To get more info about one the schools listed, enter school's number."
+      puts "To go back, type 'back'."
+      puts "What would you like to do?"
+      input = gets.strip
+      if input != "back"
+        input = gets.to_i
     
+        if (1..list_by_city.length).include?(input)
+          school = list_by_city[input-1]
+          puts school.name
+          puts school.phone
+        end
+      end 
+      
     end 
   end 
 end
