@@ -22,11 +22,17 @@ class GreenvilleSchools::Scraper
 
     list_array.each do |school|
       name = school.css("a").text
-      address = "#{school.css("div.mn-address1").text} #{school.css("span.mn-cityspan").text}, #{school.css("span.mn-stspan").text} #{school.css("span.mn-zipspan").text}"
+      street_address = school.css("div.mn-address1").text
+      city = school.css("span.mn-cityspan").text
+      state  = school.css("span.mn-stspan").text
+      zip_code = school.css("span.mn-zipspan").text
       phone = school.css("li.mn-phone").text
       
       school_info = {:name => name,
-                :address => address,
+                :street_address => street_address,
+                :city => city,
+                :state => state,
+                :zip_code => zip_code,
                 :phone => phone}
       
       schools_array << school_info
