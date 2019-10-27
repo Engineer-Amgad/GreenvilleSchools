@@ -1,15 +1,24 @@
+#to get school name => school.css("a").text
+#to get school street address => school.css("div.mn-address1").text
+#to get school city => school.css("span.mn-cityspan").text
+#to get school state => school.css("span.mn-stspan").text
+# to get school zip code => school.css("span.mn-zipspan").text
+#to get school phone number => school.css("li.mn-phone").text
+
+#go through all odd list then even list
+#schools_list.css("div.mn-list-item-odd")
+#schools_list.css("div.mn-list-item-even")
 require 'open-uri'
 require 'pry'
 class GreenvilleSchools::Scraper
   
   def pagescrape
     
-    url = "https://www.greatschools.org/north-carolina/greenville/schools/?gradeLevels%5B%5D=h&gradeLevels%5B%5D=m&gradeLevels%5B%5D=e"
+    url = "https://business.greenvillenc.org/list/category/schools-732"
     schools_list = Nokogiri::HTML(open(url))
     
     schools_array = []
-    list_array = schools_list.css("li.unsaved")
-    binding.pry
+    list_array = schools_list.css("div.mn-list-item-odd")
     # schools_list.css("li.unsaved").each do |school|
       list_array.each do |school|
         binding.pry
