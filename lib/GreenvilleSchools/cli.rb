@@ -1,7 +1,11 @@
-#require 'pry'
+require 'pry'
 class GreenvilleSchools::CLI 
-  #binding.pry
-  def call 
-    puts "hello world"
+  
+  def call
+    
+    GreenvilleSchools::Scraper.new.pagescrape
+    
+    School.display
+    
   end 
 end

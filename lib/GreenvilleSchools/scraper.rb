@@ -8,6 +8,7 @@
 #go through all odd list then even list
 #schools_list.css("div.mn-list-item-odd")
 #schools_list.css("div.mn-list-item-even")
+
 require 'open-uri'
 require 'pry'
 class GreenvilleSchools::Scraper
@@ -17,7 +18,7 @@ class GreenvilleSchools::Scraper
     url = "https://business.greenvillenc.org/list/category/schools-732"
     schools_list = Nokogiri::HTML(open(url))
     
-    schools_array = []
+    # schools_array = []
     list_array = schools_list.css("div.mn-list-item-odd")
 
     list_array.each do |school|
@@ -28,18 +29,27 @@ class GreenvilleSchools::Scraper
       zip_code = school.css("span.mn-zipspan").text
       phone = school.css("li.mn-phone").text
       
-      school_info = {:name => name,
-                :street_address => street_address,
-                :city => city,
-                :state => state,
-                :zip_code => zip_code,
-                :phone => phone}
+      # school_info = {:name => name,
+      #           :street_address => street_address,
+      #           :city => city,
+      #           :state => state,
+      #           :zip_code => zip_code,
+      #           :phone => phone}
       
-      schools_array << school_info
+      # schools_array << school_info
+      
+      school = GreenvilleSchools::School.new
+      school.name = name
+      school.street_address = street_address
+      school.city = city
+      school.state  = state
+      school.zip_code = zip_code
+      school.phone = phone
+      school.save
       
       end
-    schools_array
-    binding.pry
+    # schools_array
+    # binding.pry
   end
   
 end 
