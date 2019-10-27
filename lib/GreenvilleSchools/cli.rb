@@ -42,7 +42,7 @@ class GreenvilleSchools::CLI
   
   def list_by_city
     #prints all school in a particular city alphabetically
-    puts "Please enter city:"
+    puts "Please enter city: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
     input = gets.chomp
     list_by_city = GreenvilleSchools::School.all.select {|school| school.city == input}
     list_by_city.each.with_index(1) do |school,index|
@@ -55,7 +55,7 @@ class GreenvilleSchools::CLI
   def school_details(list_of_schools) #this method gives the user detail info about the school they choose.
     input = ""
     while input != "back"
-      puts "To get more info about one the schools listed, enter school's number."
+      puts "To get more info about a listed school, enter school's number."
       puts "To go back, type 'back'."
       puts "What would you like to do?"
       input = gets.strip
