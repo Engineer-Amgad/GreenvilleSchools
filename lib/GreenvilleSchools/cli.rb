@@ -5,8 +5,6 @@ class GreenvilleSchools::CLI
     
     GreenvilleSchools::Scraper.new.pagescrape
     
-    # School.display
-    
      input = ""
     while input != "exit"
       puts "Welcome to Greenville area schools' directry!"
@@ -35,13 +33,29 @@ class GreenvilleSchools::CLI
 
    #this give the user a list of the schools sorted by name alphabetically
    
-    schools_sorted_by_name = GreenvilleSchools::School.all.sort_by {|school| school.name}.uniq
-    
+    schools_sorted_by_name = GreenvilleSchools::School.all
     schools_sorted_by_name.each.with_index(1) do |school,index|
-    #binding.pry
       puts "#{index}. #{school.name}"
     end
+    puts "=============================="
+    #input = ""
   end
   
-  
+  def list_by_city
+    #prints all school in a particular city alphabetically
+    puts "Please enter city:"
+    input = gets.chomp
+    list_by_city = GreenvilleSchools::School.all.select {|school| school.city == input}
+    list_by_city.each.with_index(1) do |school,index|
+    puts "#{index}. #{school.name}"
+    end 
+    
+    while input != "back"
+    puts "to get more info about one the schools listed, enter school's number."
+    puts "To go back, type 'back'."
+    puts "What would you like to do?"
+    input = gets.strip
+    
+    end 
+  end 
 end

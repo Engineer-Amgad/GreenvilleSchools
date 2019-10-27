@@ -36,7 +36,7 @@ class GreenvilleSchools::Scraper
       phone = school.css("li.mn-phone").text
       
       school = GreenvilleSchools::School.new
-      school.name = name
+      school.name = name.chomp('Map')
       school.street_address = street_address
       school.city = city
       school.state  = state

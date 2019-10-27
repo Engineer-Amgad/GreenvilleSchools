@@ -9,7 +9,7 @@ class GreenvilleSchools::School
   end 
   
   def self.all 
-    @@all 
+    @@all.sort_by {|school| school.name}.uniq 
   end 
   
   def self.display
