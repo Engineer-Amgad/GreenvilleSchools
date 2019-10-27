@@ -40,8 +40,7 @@ class GreenvilleSchools::CLI
     puts "=============================="
   end
   
-  def list_by_city
-    #prints all school in a particular city alphabetically
+  def list_by_city #prints all schools in a particular city alphabetically
     puts "Please enter city: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
     input = gets.chomp
     list_by_city = GreenvilleSchools::School.all.select {|school| school.city == input}
@@ -52,25 +51,35 @@ class GreenvilleSchools::CLI
     school_details(list_by_city)
   end 
   
-  def school_details(list_of_schools) #this method gives the user detail info about the school they choose.
+  def list_by_zip_code #prints all schools in a particular zip code alphabetically
+    puts "Please enter zip code: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
+    input = gets.chomp
+    list_by_zip_code = GreenvilleSchools::School.all.select {|school| school.zip_code == input}
+    list_by_zip_code.each.with_index(1) do |school,index|
+    puts "#{index}. #{school.name}"
+    end 
+    puts "=============================="
+    school_details(list_by_zip_code)
+  end 
+  
+  def school_details(list_of_schools) #prints detail info about the school they choose.
     input = ""
     while input != "back"
-      puts "To get more info about a listed school, enter school's number."
+      puts "To get more info about a listed school, enter school's number from list above."
       puts "To go back, type 'back'."
       puts "What would you like to do?"
       input = gets.strip
-      #binding.pry
       break if input == "back"
         input = input.to_i
         
         if (1..list_of_schools.length).include?(input)
           school = list_of_schools[input-1]
-          puts school.name
-          puts school.phone
+          puts "Name: #{school.name}."
+          puts "Address: #{school.street_address} #{school.city}, #{school.state} #{school.zip_code}."
+          puts "Phone number: #{school.phone}."
           puts "=============================="
         end
     end 
   end 
-  
   
 end
