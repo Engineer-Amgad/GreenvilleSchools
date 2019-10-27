@@ -22,7 +22,7 @@ class GreenvilleSchools::School
   
   def self.create
     GreenvilleSchools::Scraper.new.pagescrape
-    self.display
-    binding.pry
+    #self.display
+    #binding.pry
   end 
 end 
