@@ -18,9 +18,15 @@ class GreenvilleSchools::Scraper
     url = "https://business.greenvillenc.org/list/category/schools-732"
     schools_list = Nokogiri::HTML(open(url))
     
-    # schools_array = []
     list_array = schools_list.css("div.mn-list-item-odd")
-
+    objects_creater(list_array)
+    
+    list_array = schools_list.css("div.mn-list-item-even")
+    objects_creater(list_array)
+  end
+  
+  def objects_creater(list_array)
+    
     list_array.each do |school|
       name = school.css("a").text
       street_address = school.css("div.mn-address1").text
@@ -28,15 +34,6 @@ class GreenvilleSchools::Scraper
       state  = school.css("span.mn-stspan").text
       zip_code = school.css("span.mn-zipspan").text
       phone = school.css("li.mn-phone").text
-      
-      # school_info = {:name => name,
-      #           :street_address => street_address,
-      #           :city => city,
-      #           :state => state,
-      #           :zip_code => zip_code,
-      #           :phone => phone}
-      
-      # schools_array << school_info
       
       school = GreenvilleSchools::School.new
       school.name = name
@@ -46,10 +43,6 @@ class GreenvilleSchools::Scraper
       school.zip_code = zip_code
       school.phone = phone
       school.save
-      
       end
-    # schools_array
-    # binding.pry
-  end
-  
+  end 
 end 
