@@ -19,24 +19,21 @@ class GreenvilleSchools::Scraper
     
     schools_array = []
     list_array = schools_list.css("div.mn-list-item-odd")
-    # schools_list.css("li.unsaved").each do |school|
-      list_array.each do |school|
-        binding.pry
-      end 
-    #   name = school.css(".name").text
-    #   address = school.css(".address").text
-    #   school_url = school.css("a").attribute("href").value
-    #   scale = school.css(".scale").text
-      
-    #   school_info = {:name => name,
-    #             :address => address,
-    #             :school_url => school_url, :scale => scale
-    #   }
-      
-    #   schools_array << school_info
-    #   end
-    # schools_array
 
+    list_array.each do |school|
+      name = school.css("a").text
+      address = "#{school.css("div.mn-address1").text} #{school.css("span.mn-cityspan").text}, #{school.css("span.mn-stspan").text} #{school.css("span.mn-zipspan").text}"
+      phone = school.css("li.mn-phone").text
+      
+      school_info = {:name => name,
+                :address => address,
+                :phone => phone}
+      
+      schools_array << school_info
+      
+      end
+    schools_array
+    binding.pry
   end
   
 end 
