@@ -1,16 +1,4 @@
-#to get school name => school.css("a").text
-#to get school street address => school.css("div.mn-address1").text
-#to get school city => school.css("span.mn-cityspan").text
-#to get school state => school.css("span.mn-stspan").text
-# to get school zip code => school.css("span.mn-zipspan").text
-#to get school phone number => school.css("li.mn-phone").text
-
-#go through all odd list then even list
-#schools_list.css("div.mn-list-item-odd")
-#schools_list.css("div.mn-list-item-even")
-
 require 'open-uri'
-require 'pry'
 class GreenvilleSchools::Scraper
   
   def pagescrape
@@ -27,21 +15,14 @@ class GreenvilleSchools::Scraper
   
   def objects_creater(list_array)
     
-    list_array.each do |school|
-      name = school.css("a").text
-      street_address = school.css("div.mn-address1").text
-      city = school.css("span.mn-cityspan").text
-      state  = school.css("span.mn-stspan").text
-      zip_code = school.css("span.mn-zipspan").text
-      phone = school.css("li.mn-phone").text
-      
+    list_array.each do |list_item|
       school = GreenvilleSchools::School.new
-      school.name = name.chomp('Map')
-      school.street_address = street_address
-      school.city = city
-      school.state  = state
-      school.zip_code = zip_code
-      school.phone = phone
+      school.name = list_item.css("a").text.chomp('Map')
+      school.street_address = list_item.css("div.mn-address1").text
+      school.city = list_item.css("span.mn-cityspan").text
+      school.state  = list_item.css("span.mn-stspan").text
+      school.zip_code = list_item.css("span.mn-zipspan").text
+      school.phone = list_item.css("li.mn-phone").text
       school.save
       end
   end 

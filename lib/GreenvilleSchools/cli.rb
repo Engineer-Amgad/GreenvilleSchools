@@ -1,4 +1,4 @@
-require 'pry'
+
 class GreenvilleSchools::CLI 
   
   def call
@@ -22,16 +22,13 @@ class GreenvilleSchools::CLI
         list_by_city
       when "list by zip code"
         list_by_zip_code
-      when "play song"
-        play_song
       end
     end
   end 
   
-  def list_all
+  def list_all #Prints a list of the all schools in Greenville area sorted by name alphabetically
     
     input = ""
-   #this give the user a list of the schools sorted by name alphabetically
    
     schools_sorted_by_name = GreenvilleSchools::School.all
     schools_sorted_by_name.each.with_index(1) do |school,index|
@@ -41,7 +38,7 @@ class GreenvilleSchools::CLI
   end
   
   def list_by_city #prints all schools in a particular city alphabetically
-    puts "Please enter city: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
+    puts "Please enter a city in Greenville area: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
     input = gets.chomp
     list_by_city = GreenvilleSchools::School.all.select {|school| school.city == input}
     list_by_city.each.with_index(1) do |school,index|
@@ -52,7 +49,7 @@ class GreenvilleSchools::CLI
   end 
   
   def list_by_zip_code #prints all schools in a particular zip code alphabetically
-    puts "Please enter zip code: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
+    puts "Please enter a zip code in Greenville area: 27834, 27858, 27884, 27828, 28530, 28590, 28513, 27837, 27812!"
     input = gets.chomp
     list_by_zip_code = GreenvilleSchools::School.all.select {|school| school.zip_code == input}
     list_by_zip_code.each.with_index(1) do |school,index|
