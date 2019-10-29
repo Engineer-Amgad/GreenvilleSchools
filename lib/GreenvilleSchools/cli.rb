@@ -27,8 +27,6 @@ class GreenvilleSchools::CLI
   end 
   
   def list_all #Prints a list of the all schools in Greenville area sorted by name alphabetically
-    
-    input = ""
    
     schools_sorted_by_name = GreenvilleSchools::School.all
     schools_sorted_by_name.each.with_index(1) do |school,index|
@@ -38,15 +36,24 @@ class GreenvilleSchools::CLI
   end
   
   def list_by_city #prints all schools in a particular city alphabetically
-    puts "Please enter a city in Greenville area: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
-    input = gets.chomp
-    list_by_city = GreenvilleSchools::School.all.select {|school| school.city == input}
-    list_by_city.each.with_index(1) do |school,index|
-    puts "#{index}. #{school.name}"
+    cities_array = ["Greenville", "Winterville", "Ayden", "Farmville", "Grimesland", "Bethel", "Grifton", "Stokes"]
+    input = ""
+    while input != "back"
+      puts "Please enter a city in Greenville area: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
+      puts "To go back, type 'back'."
+      puts "What would you like to do?"
+      input = gets.chomp
+      if cities_array.include?(input)
+        list_by_city = GreenvilleSchools::School.all.select {|school| school.city == input}
+        list_by_city.each.with_index(1) do |school,index|
+        puts "#{index}. #{school.name}"
+        end 
+        puts "=============================="
+        school_details(list_by_city)
+      end
     end 
-    puts "=============================="
-    school_details(list_by_city)
-  end 
+  end
+  
   
   def list_by_zip_code #prints all schools in a particular zip code alphabetically
     puts "Please enter a zip code in Greenville area: 27834, 27858, 27884, 27828, 28530, 28590, 28513, 27837, 27812!"
@@ -66,7 +73,7 @@ class GreenvilleSchools::CLI
       puts "To go back, type 'back'."
       puts "What would you like to do?"
       input = gets.strip
-      break if input == "back"
+      # break if input == "back"
         input = input.to_i
         
         if (1..list_of_schools.length).include?(input)
