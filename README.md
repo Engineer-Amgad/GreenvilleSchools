@@ -1,8 +1,4 @@
-# GreenvilleSchools
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/GreenvilleSchools`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to GreenvilleSchools gem. This gem gives the user information about all public schools in greenville, NC area. this includes the city of greenville and surrounding cities. 
 
 ## Installation
 
@@ -22,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+run bin/greenville-schools to begin interacting with the cli. follow the prompt and you will find all the information you seek about schools in the greenville area. 
+
+Have fun!
 
 ## Development
 
