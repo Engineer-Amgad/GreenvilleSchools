@@ -36,7 +36,9 @@ class GreenvilleSchools::CLI
   end
   
   def list_by_city #prints all schools in a particular city alphabetically
-    cities_array = ["Greenville", "Winterville", "Ayden", "Farmville", "Grimesland", "Bethel", "Grifton", "Stokes"]
+
+    cities_array = []
+    GreenvilleSchools::School.all.each {|school| cities_array << school.city}
     input = ""
     while input != "back"
       puts "Please enter a city in Greenville area: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!"
@@ -56,14 +58,21 @@ class GreenvilleSchools::CLI
   
   
   def list_by_zip_code #prints all schools in a particular zip code alphabetically
-    puts "Please enter a zip code in Greenville area: 27834, 27858, 27884, 27828, 28530, 28590, 28513, 27837, 27812!"
-    input = gets.chomp
-    list_by_zip_code = GreenvilleSchools::School.all.select {|school| school.zip_code == input}
-    list_by_zip_code.each.with_index(1) do |school,index|
-    puts "#{index}. #{school.name}"
+    zip_codes_array = []
+    GreenvilleSchools::School.all.each {|school| zip_codes_array << school.zip_code}
+    input = ""
+    while input != "back"
+      puts "Please enter a zip code in Greenville area: 27834, 27858, 27884, 27828, 28530, 28590, 28513, 27837, 27812!"
+      input = gets.chomp
+      if zip_codes_array.include?(input)
+        list_by_zip_code = GreenvilleSchools::School.all.select {|school| school.zip_code == input}
+        list_by_zip_code.each.with_index(1) do |school,index|
+        puts "#{index}. #{school.name}"
+        end 
+        puts "=============================="
+        school_details(list_by_zip_code)
+      end
     end 
-    puts "=============================="
-    school_details(list_by_zip_code)
   end 
   
   def school_details(list_of_schools) #prints detail info about the school they choose.
@@ -72,8 +81,8 @@ class GreenvilleSchools::CLI
       puts "To get more info about a listed school, enter school's number from list above."
       puts "To go back, type 'back'."
       puts "What would you like to do?"
-      input = gets.strip
-      # break if input == "back"
+      input = gets.chomp
+      break if input == "back"
         input = input.to_i
         
         if (1..list_of_schools.length).include?(input)
