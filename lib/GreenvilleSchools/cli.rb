@@ -16,12 +16,12 @@ class GreenvilleSchools::CLI
       input = gets.strip
 
       case input
-      when "list all"
-        list_all
-      when "list by city"
-        list_by_city
-      when "list by zip code"
-        list_by_zip_code
+        when "list all"
+          list_all
+        when "list by city"
+          list_by_city
+        when "list by zip code"
+          list_by_zip_code
       end
     end
   end 
@@ -63,7 +63,10 @@ class GreenvilleSchools::CLI
     input = ""
     while input != "back"
       puts "Please enter a zip code in Greenville area: 27834, 27858, 27884, 27828, 28530, 28590, 28513, 27837, 27812!"
+      puts "To go back, type 'back'."
+      puts "What would you like to do?"
       input = gets.chomp
+      call if input == "main"
       if zip_codes_array.include?(input)
         list_by_zip_code = GreenvilleSchools::School.all.select {|school| school.zip_code == input}
         list_by_zip_code.each.with_index(1) do |school,index|
@@ -80,6 +83,7 @@ class GreenvilleSchools::CLI
     while input != "back"
       puts "To get more info about a listed school, enter school's number from list above."
       puts "To go back, type 'back'."
+      puts "To go main manue, type 'main'."
       puts "What would you like to do?"
       input = gets.chomp
       break if input == "back"
