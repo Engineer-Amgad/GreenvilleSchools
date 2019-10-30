@@ -40,11 +40,11 @@ class GreenvilleSchools::CLI
     cities_array = []
     GreenvilleSchools::School.all.each {|school| cities_array << school.city}
     input = ""
-    while input != "back"
+    while input != "Back"
       puts "Please enter a city in Greenville area: Greenville, Winterville, Ayden, Farmville, Grimesland, Bethel, Grifton, Stokes!".colorize(:light_green)
       puts "To go back, type 'back'.".colorize(:light_green)
       puts "What would you like to do?".colorize(:light_green)
-      input = gets.chomp
+      input = gets.chomp.capitalize
       if cities_array.include?(input)
         list_by_city = GreenvilleSchools::School.all.select {|school| school.city == input}
         list_by_city.each.with_index(1) do |school,index|
