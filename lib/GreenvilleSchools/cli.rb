@@ -82,7 +82,6 @@ class GreenvilleSchools::CLI
     while input != "back"
       puts "To get more info about a listed school, enter school's number from list above.".colorize(:light_green)
       puts "To go back, type 'back'.".colorize(:light_green)
-      puts "To go main manue, type 'main'.".colorize(:light_green)
       puts "What would you like to do?".colorize(:light_green)
       input = gets.chomp
       break if input == "back"
